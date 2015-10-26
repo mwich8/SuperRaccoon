@@ -5,15 +5,12 @@ public class Obstacles : MonoBehaviour {
 
     private float speed = 0.08f;
 
-    private TextMesh textObject;
-
     private int numberOfTurns;
     private int rotateAroundY;
 
     // Use this for initialization
     void Start()
     {
-        textObject = GameObject.Find("Score").GetComponent<TextMesh>();
         // Every time a dice is generated it should be rotated and get a random color
         if (gameObject.name == "Dice(Clone)")
         {
@@ -28,16 +25,12 @@ public class Obstacles : MonoBehaviour {
     void Update () {
         // Set movement speed of the obstacles
         transform.Translate(-speed-(Mathf.Sqrt(Player.score))/100, 0, 0, Space.World);
-        // Destruction of 
+        // Destruction of obstacles
         if (transform.position.x < -15.5f && gameObject.name == "Dice(Clone)")
         {
-            Player.score++;
-            textObject.text = "Score: " + Player.score;
             Destroy(gameObject);
         } else if (transform.position.x < -17.72f && gameObject.name == "Table(Clone)")
         {
-            Player.score++;
-            textObject.text = "Score: " + Player.score;
             Destroy(gameObject);
         }
     }

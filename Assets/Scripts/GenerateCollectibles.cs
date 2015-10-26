@@ -5,27 +5,52 @@ public class GenerateCollectibles : MonoBehaviour {
 
     public GameObject energy;
 
-    public float spawnTime = 0.2f;
+    public float spawnTimeBetweenCollectibles = 0.2f;
+
+    private float offsetTime = 0.2f;
+
+    private int numberOfCollectibles;
+
+    private float offsetY;
 
 	// Use this for initialization
 	void Start () {
-        energy.transform.position = new Vector3(15.5f, Random.Range(-7.25f, 1f));
+        // energy.transform.position = new Vector3(15.5f, Random.Range(-7.25f, 1f));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    if (spawnTime > 0)
+	    if (offsetTime > 0)
         {
-            spawnTime -= Time.deltaTime;
+            offsetTime -= Time.deltaTime;
         } else
         {
-            GenerateCollectible();
-            spawnTime = 0.2f;
+            StartCoroutine(GenerateCollectible());
+            // GenerateCollectible();
+            offsetTime += Random.Range(1f,5f);
         }
 	}
 
-    void GenerateCollectible()
+    IEnumerator GenerateCollectible()
     {
-        Instantiate(energy);
+        // Determines number of collectibles that have to be genrated and their position
+        numberOfCollectibles = Random.Range(0, 10);
+        energy.transform.position = new Vector3(15.5f, Random.Range(-7f, 1f));
+        offsetY = energy.transform.position.y;
+        while (numberOfCollectibles > 0)
+        {
+            offsetTime += spawnTimeBetweenCollectibles;
+            yield return new WaitForSeconds(spawnTimeBetweenCollectibles);
+            offsetY = energy.transform.position.y + Random.Range(0f, 1f);
+            if (Random.Range(0f,1f) >= 0.5f)
+            {
+                energy.transform.position = new Vector3(transform.position.x, offsetY + Random.Range(0f, 1f));
+            } else
+            {
+                energy.transform.position = new Vector3(transform.position.x, offsetY - Random.Range(0f, 1f));
+            }
+            Instantiate(energy);
+            numberOfCollectibles--;
+        }
     }
 }

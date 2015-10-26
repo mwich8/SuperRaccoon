@@ -13,12 +13,15 @@ public class Player : MonoBehaviour {
 
     public State state;
 
+    private TextMesh textObject;
+
     private float jumpHeight = 13.5f;
 
     public static int score = 0;
 
 	// Use this for initialization
 	void Start () {
+        textObject = GameObject.Find("Score").GetComponent<TextMesh>();
         animator = gameObject.GetComponentInChildren<Animator>();
 	}
 	
@@ -78,6 +81,12 @@ public class Player : MonoBehaviour {
         {
             state = State.normal;
             //Destroy(col.gameObject);
+        }
+        if (col.gameObject.tag == "Collectible")
+        {
+            score++;
+            textObject.text = "Score: " + Player.score;
+            Destroy(col.gameObject);
         }
     }
 
