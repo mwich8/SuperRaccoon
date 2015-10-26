@@ -1,0 +1,295 @@
+fileFormatVersion: 2
+guid: 5a9fc2130c17df449a2d100ad80a380a
+timeCreated: 1445731025
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Back
+    100004: BackFoot_IK_L
+    100006: BackFoot_IK_R
+    100008: BackFoot_L
+    100010: BackFoot_R
+    100012: BackLowerLeg_L
+    100014: BackLowerLeg_R
+    100016: BackUpperLeg_L
+    100018: BackUpperLeg_R
+    100020: Eye_L
+    100022: Eye_R
+    100024: FrontFoot_IK_L
+    100026: FrontFoot_IK_R
+    100028: FrontLowerLeg_L
+    100030: FrontLowerLeg_R
+    100032: FrontUpperLeg_L
+    100034: FrontUpperLeg_R
+    100036: Head
+    100038: LeftFoot_L
+    100040: LeftFoot_R
+    100042: LowerBack
+    100044: LowerTail
+    100046: Neck
+    100048: Raccoon
+    100050: //RootNode
+    100052: UpperTail
+    400000: Armature
+    400002: Back
+    400004: BackFoot_IK_L
+    400006: BackFoot_IK_R
+    400008: BackFoot_L
+    400010: BackFoot_R
+    400012: BackLowerLeg_L
+    400014: BackLowerLeg_R
+    400016: BackUpperLeg_L
+    400018: BackUpperLeg_R
+    400020: Eye_L
+    400022: Eye_R
+    400024: FrontFoot_IK_L
+    400026: FrontFoot_IK_R
+    400028: FrontLowerLeg_L
+    400030: FrontLowerLeg_R
+    400032: FrontUpperLeg_L
+    400034: FrontUpperLeg_R
+    400036: Head
+    400038: LeftFoot_L
+    400040: LeftFoot_R
+    400042: LowerBack
+    400044: LowerTail
+    400046: Neck
+    400048: Raccoon
+    400050: //RootNode
+    400052: UpperTail
+    4300000: Raccoon
+    4300002: Eye_R
+    4300004: Eye_L
+    7400000: Running
+    7400002: Jumping
+    7400004: PoseLib
+    9500000: //RootNode
+    13700000: Eye_L
+    13700002: Eye_R
+    13700004: Raccoon
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Running
+      takeName: Default Take
+      firstFrame: 1
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 12
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/BackFoot_IK_L
+        weight: 1
+      - path: Armature/BackFoot_IK_L/BackFoot_L
+        weight: 1
+      - path: Armature/BackFoot_IK_R
+        weight: 1
+      - path: Armature/BackFoot_IK_R/BackFoot_R
+        weight: 1
+      - path: Armature/FrontFoot_IK_L
+        weight: 1
+      - path: Armature/FrontFoot_IK_L/LeftFoot_L
+        weight: 1
+      - path: Armature/FrontFoot_IK_R
+        weight: 1
+      - path: Armature/FrontFoot_IK_R/LeftFoot_R
+        weight: 1
+      - path: Armature/LowerBack
+        weight: 1
+      - path: Armature/LowerBack/Back
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_L/BackLowerLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_R/BackLowerLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_L/FrontLowerLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_R/FrontLowerLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/Neck
+        weight: 1
+      - path: Armature/LowerBack/Back/Neck/Head
+        weight: 1
+      - path: Armature/UpperTail
+        weight: 1
+      - path: Armature/UpperTail/LowerTail
+        weight: 1
+      - path: Eye_L
+        weight: 1
+      - path: Eye_R
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Jumping
+      takeName: ArmatureAction
+      firstFrame: 32
+      lastFrame: 63
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/BackFoot_IK_L
+        weight: 1
+      - path: Armature/BackFoot_IK_L/BackFoot_L
+        weight: 1
+      - path: Armature/BackFoot_IK_R
+        weight: 1
+      - path: Armature/BackFoot_IK_R/BackFoot_R
+        weight: 1
+      - path: Armature/FrontFoot_IK_L
+        weight: 1
+      - path: Armature/FrontFoot_IK_L/LeftFoot_L
+        weight: 1
+      - path: Armature/FrontFoot_IK_R
+        weight: 1
+      - path: Armature/FrontFoot_IK_R/LeftFoot_R
+        weight: 1
+      - path: Armature/LowerBack
+        weight: 1
+      - path: Armature/LowerBack/Back
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_L/BackLowerLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/BackUpperLeg_R/BackLowerLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_L/FrontLowerLeg_L
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/FrontUpperLeg_R/FrontLowerLeg_R
+        weight: 1
+      - path: Armature/LowerBack/Back/Neck
+        weight: 1
+      - path: Armature/LowerBack/Back/Neck/Head
+        weight: 1
+      - path: Armature/UpperTail
+        weight: 1
+      - path: Armature/UpperTail/LowerTail
+        weight: 1
+      - path: Eye_L
+        weight: 1
+      - path: Eye_R
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
