@@ -6,7 +6,9 @@ public class Collectibles : MonoBehaviour {
     private float oneDirection = 1f;
 
     private float amountMovingY = 1.5f;
-    // private float amountMovingX = 0.2f;
+    public bool wasCollected = false;
+
+    private Vector3 direction;
 
     // private Light light;
     private Shader shader;
@@ -15,24 +17,24 @@ public class Collectibles : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        // light = GetComponent<Light>();
-        // light.color = new Color(0.3f, 1, 0);
-        // Renderer rend = GetComponent<Renderer>();
-        // rend.material.shader = Shader.Find("Emission");
-        // rend.material.SetColor("_Emission", Color.red);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(-0.08f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
+        if (!wasCollected)
+        {
+            transform.Translate(-0.08f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
+        } else
+        {
+            transform.Translate(direction/7.5f, Space.World);
+            // transform.Translate(-0.08f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
+        }
         if (isMovingUpwards)
         {
             transform.Translate(Vector3.up/200);
-            // GetComponent<Rigidbody>().velocity = new Vector3(0, amountMovingX, 0);
         } else
         {
             transform.Translate(Vector3.down/200);
-            // GetComponent<Rigidbody>().velocity = new Vector3(0, -amountMovingX, 0);
         }
         if (oneDirection > 0)
         {
@@ -42,9 +44,16 @@ public class Collectibles : MonoBehaviour {
             oneDirection = amountMovingY;
             isMovingUpwards = !isMovingUpwards;
         }
-        if (transform.position.x <= -15.5f)
+        if (transform.position.x <= -15.5f || transform.position.y >= 11f)
         {
             Destroy(gameObject);
         }
 	}
+
+    public void SimpleMethod(Vector3 dir)
+    {
+        print(dir);
+        direction = dir;
+        wasCollected = true;
+    }
 }

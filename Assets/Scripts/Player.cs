@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
         jumping
     }
 
+    public GameObject raccoonGUI;
+
     private Animator animator;
 
     public static State state;
@@ -104,7 +106,13 @@ public class Player : MonoBehaviour {
             }
             score++;
             textObject.text = "Score: " + Player.score;
-            Destroy(coll.gameObject);
+            Vector3 pos = raccoonGUI.transform.position;
+            Vector3 heading = gameObject.transform.position + pos;
+            // print("x: " + heading.x + "  y: " + heading.y + "  z: " + heading.z);
+            Vector3 headingNew = new Vector3(heading.x*4, heading.y, 0);
+            coll.gameObject.GetComponent<Collectibles>().SimpleMethod(headingNew);
+            // coll.gameObject.transform.Translate(heading);
+            // Destroy(coll.gameObject);
         }
     }
 
