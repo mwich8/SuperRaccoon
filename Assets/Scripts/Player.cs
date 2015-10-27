@@ -20,6 +20,9 @@ public class Player : MonoBehaviour {
 
     public static int score = 0;
 
+    public static int darkEnergy = 0;
+    public static int lightEnergy = 0;
+
     // Use this for initialization
     void Start () {
         textObject = GameObject.Find("Score").GetComponent<TextMesh>();
@@ -77,7 +80,6 @@ public class Player : MonoBehaviour {
     {
         if (col.gameObject.tag == "Obstacle")
         {
-            // print(Vector3.Dot(col.contacts[0].normal, -Vector3.up));
             if (Vector3.Dot(col.contacts[0].normal, -Vector3.up) > -0.5f && Vector3.Dot(col.contacts[0].normal, -Vector3.up) <= 0)
             {
                 saveProgress();
@@ -90,6 +92,16 @@ public class Player : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Collectible")
         {
+            // Checks whether dark or light energy was collected
+            if (coll.GetComponent<Light>().color == Color.red)
+            {
+                darkEnergy++;
+                // print("Dark Energy counter: " + darkEnergy);
+            } else
+            {
+                lightEnergy++;
+                // print("Light Energy counter: " + lightEnergy);
+            }
             score++;
             textObject.text = "Score: " + Player.score;
             Destroy(coll.gameObject);
@@ -98,11 +110,14 @@ public class Player : MonoBehaviour {
 
     void saveProgress()
     {
-        print("saving");
         BinaryFormatter bf = new BinaryFormatter();
         //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
-        FileStream file = File.Create(Application.persistentDataPath + "/progress.sg"); //you can call it anything you want
-        bf.Serialize(file, score);
+        FileStream file = File.Create(Application.persistentDataPath + "/progress.sg");
+        int[] scores = new int[3];
+        scores[0] = score;
+        scores[1] = darkEnergy;
+        scores[2] = lightEnergy;
+        bf.Serialize(file, scores);
         file.Close();
     }
 
@@ -110,10 +125,12 @@ public class Player : MonoBehaviour {
     {
         if (File.Exists(Application.persistentDataPath + "/progress.sg"))
         {
-            print("loading");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/progress.sg", FileMode.Open);
-            score = (int)bf.Deserialize(file);
+            int[] scores = (int[])bf.Deserialize(file);
+            score = scores[0];
+            darkEnergy = scores[1];
+            lightEnergy = scores[2];
             textObject.text = "Score: " + Player.score;
             file.Close();
         }

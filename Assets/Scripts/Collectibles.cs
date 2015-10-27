@@ -17,9 +17,9 @@ public class Collectibles : MonoBehaviour {
 	void Start () {
         // light = GetComponent<Light>();
         // light.color = new Color(0.3f, 1, 0);
-        Renderer rend = GetComponent<Renderer>();
+        // Renderer rend = GetComponent<Renderer>();
         // rend.material.shader = Shader.Find("Emission");
-        rend.material.SetColor("_Emission", Color.blue);
+        // rend.material.SetColor("_Emission", Color.red);
     }
 	
 	// Update is called once per frame
