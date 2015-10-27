@@ -14,7 +14,6 @@ public class Feet : MonoBehaviour {
     void Update()
     {
         transform.position = new Vector3(gameObject.transform.parent.transform.position.x + 0.5f, gameObject.transform.parent.transform.position.y - 0.5f);
-        print(gameObject.transform.parent.transform.position.y);
         transform.Translate(-0.05f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
         if (transform.position.x <= -30)
         {

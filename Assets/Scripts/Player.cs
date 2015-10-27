@@ -27,7 +27,6 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(state);
         if (transform.position.y < -7.4f)
         {
             transform.position = new Vector3(transform.position.x, -7.4f, transform.position.z);
@@ -76,7 +75,11 @@ public class Player : MonoBehaviour {
     {
         if (col.gameObject.tag == "Obstacle")
         {
-            Application.LoadLevel("mainScene");
+            // print(Vector3.Dot(col.contacts[0].normal, -Vector3.up));
+            if (Vector3.Dot(col.contacts[0].normal, -Vector3.up) > -0.5f && Vector3.Dot(col.contacts[0].normal, -Vector3.up) <= 0)
+            {
+                Application.LoadLevel("mainScene");
+            }
         }
     }
 
