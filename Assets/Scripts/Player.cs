@@ -27,9 +27,9 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        loadProgress();
         textObject = GameObject.Find("Score").GetComponent<TextMesh>();
         animator = gameObject.GetComponentInChildren<Animator>();
-        laodProgress();
     }
 	
 	// Update is called once per frame
@@ -106,14 +106,15 @@ public class Player : MonoBehaviour {
             }
             score++;
             textObject.text = "Score: " + Player.score;
-            Vector3 pos = raccoonGUI.transform.position;
-            Vector3 heading = gameObject.transform.position + pos;
-            // print("x: " + heading.x + "  y: " + heading.y + "  z: " + heading.z);
-            Vector3 headingNew = new Vector3(heading.x*4, heading.y, 0);
-            coll.gameObject.GetComponent<Collectibles>().SimpleMethod(headingNew);
-            // coll.gameObject.transform.Translate(heading);
-            // Destroy(coll.gameObject);
+            coll.gameObject.GetComponent<Collectibles>().SimpleMethod();
         }
+    }
+
+    public void updateRaccoonGUI()
+    {
+        // Renderer rend = Player.raccoonGUI.GetComponent<Renderer>();
+        // rend.material.SetColor("_Color", Color.red);
+        print("RACCOON!");
     }
 
     void saveProgress()
@@ -129,7 +130,7 @@ public class Player : MonoBehaviour {
         file.Close();
     }
 
-    void laodProgress()
+    public static void loadProgress()
     {
         if (File.Exists(Application.persistentDataPath + "/progress.sg"))
         {
@@ -139,7 +140,7 @@ public class Player : MonoBehaviour {
             score = scores[0];
             darkEnergy = scores[1];
             lightEnergy = scores[2];
-            textObject.text = "Score: " + Player.score;
+            // textObject.text = "Score: " + Player.score;
             file.Close();
         }
     }

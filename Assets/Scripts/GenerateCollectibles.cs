@@ -33,8 +33,8 @@ public class GenerateCollectibles : MonoBehaviour {
     IEnumerator GenerateCollectible()
     {
         // Determines number of collectibles that have to be genrated and their position
-        numberOfCollectibles = Random.Range(0, 15);
-        energy.transform.position = new Vector3(16f, Random.Range(-7f, -2f));
+        numberOfCollectibles = Random.Range(3, 15);
+        energy.transform.position = new Vector3(16f, Random.Range(-7f, -4f));
         offsetY = energy.transform.position.y;
         // Decides whether it's dark or light energy
         if (Random.Range(0f,1f) < 0.5f)

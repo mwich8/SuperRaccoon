@@ -8,9 +8,8 @@ public class Collectibles : MonoBehaviour {
     private float amountMovingY = 1.5f;
     public bool wasCollected = false;
 
-    private Vector3 direction;
-
-    // private Light light;
+    private Vector3 raccoonGUI = new Vector3(12.8f, 7.8f, -1.0f);
+    
     private Shader shader;
 
     private bool isMovingUpwards = false;
@@ -26,8 +25,7 @@ public class Collectibles : MonoBehaviour {
             transform.Translate(-0.08f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
         } else
         {
-            transform.Translate(direction/7.5f, Space.World);
-            // transform.Translate(-0.08f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
+            transform.position = Vector3.Lerp(gameObject.transform.position, raccoonGUI, 0.075f);
         }
         if (isMovingUpwards)
         {
@@ -48,12 +46,16 @@ public class Collectibles : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-	}
+        if ((transform.position.x >= 12f || transform.position.y >= 7.2f) && wasCollected)
+        {
 
-    public void SimpleMethod(Vector3 dir)
+            // Player.updateRaccoonGUI();
+            Destroy(gameObject);
+        }
+    }
+
+    public void SimpleMethod()
     {
-        print(dir);
-        direction = dir;
         wasCollected = true;
     }
 }

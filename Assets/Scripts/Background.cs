@@ -13,7 +13,7 @@ public class Background : MonoBehaviour {
         transform.Translate(-0.05f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
         if (transform.position.x <= -30)
         {
-            transform.position = new Vector3(30, 0, 100);
+            transform.position = new Vector3(transform.position.x + 60, 0, 100);
         }
     }
 }
