@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class Player : MonoBehaviour {
 
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour {
     void Start () {
         textObject = GameObject.Find("Score").GetComponent<TextMesh>();
         animator = gameObject.GetComponentInChildren<Animator>();
+        laodProgress();
     }
 	
 	// Update is called once per frame
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour {
             // print(Vector3.Dot(col.contacts[0].normal, -Vector3.up));
             if (Vector3.Dot(col.contacts[0].normal, -Vector3.up) > -0.5f && Vector3.Dot(col.contacts[0].normal, -Vector3.up) <= 0)
             {
+                saveProgress();
                 Application.LoadLevel("mainScene");
             }
         }
@@ -90,6 +93,29 @@ public class Player : MonoBehaviour {
             score++;
             textObject.text = "Score: " + Player.score;
             Destroy(coll.gameObject);
+        }
+    }
+
+    void saveProgress()
+    {
+        print("saving");
+        BinaryFormatter bf = new BinaryFormatter();
+        //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
+        FileStream file = File.Create(Application.persistentDataPath + "/progress.sg"); //you can call it anything you want
+        bf.Serialize(file, score);
+        file.Close();
+    }
+
+    void laodProgress()
+    {
+        if (File.Exists(Application.persistentDataPath + "/progress.sg"))
+        {
+            print("loading");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/progress.sg", FileMode.Open);
+            score = (int)bf.Deserialize(file);
+            textObject.text = "Score: " + Player.score;
+            file.Close();
         }
     }
 }
