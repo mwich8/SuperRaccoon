@@ -11,22 +11,23 @@ public class Player : MonoBehaviour {
 
     private Animator animator;
 
-    public State state;
+    public static State state;
 
     private TextMesh textObject;
 
-    private float jumpHeight = 13.5f;
+    private float jumpHeight = 16f;
 
     public static int score = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         textObject = GameObject.Find("Score").GetComponent<TextMesh>();
         animator = gameObject.GetComponentInChildren<Animator>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        print(state);
         if (transform.position.y < -7.4f)
         {
             transform.position = new Vector3(transform.position.x, -7.4f, transform.position.z);
@@ -73,28 +74,19 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Platform")
-        {
-            state = State.normal;
-        }
         if (col.gameObject.tag == "Obstacle")
         {
-            state = State.normal;
-            //Destroy(col.gameObject);
-        }
-        if (col.gameObject.tag == "Collectible")
-        {
-            score++;
-            textObject.text = "Score: " + Player.score;
-            Destroy(col.gameObject);
+            Application.LoadLevel("mainScene");
         }
     }
 
-    void OnCollisionExit(Collision col)
+    void OnTriggerEnter(Collider coll)
     {
-        if (col.gameObject.tag == "Platform" || col.gameObject.tag == "Obstacle")
+        if (coll.gameObject.tag == "Collectible")
         {
-            state = State.jumping;
+            score++;
+            textObject.text = "Score: " + Player.score;
+            Destroy(coll.gameObject);
         }
     }
 }

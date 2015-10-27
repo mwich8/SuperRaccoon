@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Collectibles.cs" />
      <Compile Include="Assets\Scripts\DataReceiver.cs" />
      <Compile Include="Assets\Scripts\DataSender.cs" />
+     <Compile Include="Assets\Scripts\Feet.cs" />
      <Compile Include="Assets\Scripts\GenerateCollectibles.cs" />
      <Compile Include="Assets\Scripts\GenerateObstacles.cs" />
      <Compile Include="Assets\Scripts\Obstacles.cs" />

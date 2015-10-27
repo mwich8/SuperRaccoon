@@ -15,7 +15,6 @@ public class GenerateObstacles : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Physics.gravity = new Vector3(0,Physics.gravity.y*3);
         dice.transform.position = new Vector3(15.76f, -7.15f);
         table.transform.position = new Vector3(17.72f, -7.9f);
     }
@@ -40,12 +39,12 @@ public class GenerateObstacles : MonoBehaviour {
     {
         if (Random.Range(0f, 1f) >= 0.5f)
         {
-            // dice.transform.Rotate(90,0,0);
+            yield return new WaitForSeconds(1);
             Instantiate(dice);
         }
         else
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             Instantiate(table);
         }
     }

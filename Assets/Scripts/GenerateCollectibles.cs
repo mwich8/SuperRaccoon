@@ -5,7 +5,7 @@ public class GenerateCollectibles : MonoBehaviour {
 
     public GameObject energy;
 
-    public float spawnTimeBetweenCollectibles = 0.2f;
+    public float interval = 0.25f;
 
     private float offsetTime = 0.2f;
 
@@ -26,7 +26,6 @@ public class GenerateCollectibles : MonoBehaviour {
         } else
         {
             StartCoroutine(GenerateCollectible());
-            // GenerateCollectible();
             offsetTime += Random.Range(1f,5f);
         }
 	}
@@ -35,12 +34,12 @@ public class GenerateCollectibles : MonoBehaviour {
     {
         // Determines number of collectibles that have to be genrated and their position
         numberOfCollectibles = Random.Range(0, 10);
-        energy.transform.position = new Vector3(15.5f, Random.Range(-7f, 1f));
+        energy.transform.position = new Vector3(15.5f, Random.Range(-7f, -2f));
         offsetY = energy.transform.position.y;
         while (numberOfCollectibles > 0)
         {
-            offsetTime += spawnTimeBetweenCollectibles;
-            yield return new WaitForSeconds(spawnTimeBetweenCollectibles);
+            offsetTime += interval;
+            yield return new WaitForSeconds(interval);
             offsetY = energy.transform.position.y + Random.Range(0f, 1f);
             if (Random.Range(0f,1f) >= 0.5f)
             {
