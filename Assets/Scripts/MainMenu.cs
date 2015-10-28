@@ -21,8 +21,7 @@ public class MainMenu : MonoBehaviour {
 	
 	// Makes the logo wiggling
 	void Update () {
-        if (isLogoGrowing)
-        {
+        if (isLogoGrowing) {
             if (superRaccoonLogo.transform.localScale.x <= endScale.x)
             {
                 superRaccoonLogo.transform.localScale = new Vector3(superRaccoonLogo.transform.localScale.x + 0.0025f, superRaccoonLogo.transform.localScale.y, superRaccoonLogo.transform.localScale.z + 0.001f);
@@ -45,22 +44,20 @@ public class MainMenu : MonoBehaviour {
         }
     }
 
-    // Creates the buttons and handles the scene handling
+    // Creates the buttons and is responsible for the major scene handling
     void OnGUI()
     {
-        if (GUI.Button(new Rect((Screen.width/2) - (buttonWidth/2), 120, 150, 30), "Start"))
+        if (GUI.Button(new Rect((Screen.width/2) - (buttonWidth/2), 120, buttonWidth, buttonHeight), "Start"))
         {
-            Debug.Log("Start game!");
             Application.LoadLevel("MainScene");
         }
-        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 180, 150, 30), "Shop"))
+        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 180, buttonWidth, buttonHeight), "Shop"))
         {
-            Debug.Log("Go to shop");
             Application.LoadLevel("Shop");
         }
-        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 240, 150, 30), "Credits"))
+        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 240, buttonWidth, buttonHeight), "Credits"))
         {
-            Debug.Log("Show credits");
+            Application.LoadLevel("Credits");
         }
     }
 }

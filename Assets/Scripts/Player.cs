@@ -7,7 +7,9 @@ public class Player : MonoBehaviour {
     public enum State
     {
         normal,
-        jumping
+        jumping,
+        flying,
+        stamping
     }
 
     public GameObject raccoonGUI;
@@ -25,6 +27,9 @@ public class Player : MonoBehaviour {
     public static int darkEnergy = 0;
     public static int lightEnergy = 0;
 
+    public static bool isDark = false;
+    public static bool isLight = false;
+
     // Use this for initialization
     void Start () {
         loadProgress();
@@ -38,11 +43,29 @@ public class Player : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x, -7.4f, transform.position.z);
         }
-        if (Input.GetKey("space") && state == State.normal)
+        if (Input.touchCount > 0 && state == State.normal && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
+            print("Single");
             GetComponent<Rigidbody>().velocity = new Vector3(0, jumpHeight, 0);
         }
-        if (state == State.jumping)
+        if (Input.touchCount > 0 && state == State.jumping && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            print("Double");
+            if (isDark)
+            {
+                print("Dark");
+                GetComponent<Rigidbody>().velocity = new Vector3(0, -jumpHeight, 0);
+                state = State.stamping;
+            }
+            if (isLight)
+            {
+                print("Light");
+                GetComponent<Rigidbody>().velocity = new Vector3(0, jumpHeight, 0);
+                state = State.flying;
+            }
+        }
+
+        if (state != State.normal)
         {
             animator.SetBool("isJumping", true);
         } else
@@ -117,15 +140,25 @@ public class Player : MonoBehaviour {
         print("RACCOON!");
     }
 
-    void saveProgress()
+    public static void saveProgress()
     {
         BinaryFormatter bf = new BinaryFormatter();
         //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
         FileStream file = File.Create(Application.persistentDataPath + "/progress.sg");
-        int[] scores = new int[3];
+        int[] scores = new int[4];
         scores[0] = score;
         scores[1] = darkEnergy;
         scores[2] = lightEnergy;
+        if(isDark)
+        {
+            scores[3] = -1;
+        } else if (isLight)
+        {
+            scores[3] = 1;
+        } else
+        {
+            scores[3] = 0;
+        }
         bf.Serialize(file, scores);
         file.Close();
     }
@@ -140,7 +173,21 @@ public class Player : MonoBehaviour {
             score = scores[0];
             darkEnergy = scores[1];
             lightEnergy = scores[2];
-            // textObject.text = "Score: " + Player.score;
+            if (scores[3] == -1)
+            {
+                isDark = true;
+                isLight = false;
+            }
+            else if (scores[3] == 1)
+            {
+                isDark = false;
+                isLight = true;
+            }
+            else
+            {
+                isDark = false;
+                isLight = false;
+            }
             file.Close();
         }
     }

@@ -37,16 +37,17 @@ public class GenerateCollectibles : MonoBehaviour {
         energy.transform.position = new Vector3(16f, Random.Range(-7f, -4f));
         offsetY = energy.transform.position.y;
         // Decides whether it's dark or light energy
+        Renderer rend = energy.GetComponent<Renderer>();
         if (Random.Range(0f,1f) < 0.5f)
         {
-            Renderer rend = energy.GetComponent<Renderer>();
             rend.sharedMaterial.SetColor("_Color", Color.red);
+            rend.sharedMaterial.SetColor("_EmissionColor", Color.red);
             energy.GetComponent<Light>().color = Color.red;
         }
         else
         {
-            Renderer rend = energy.GetComponent<Renderer>();
             rend.sharedMaterial.SetColor("_Color", Color.blue);
+            rend.sharedMaterial.SetColor("_EmissionColor", Color.blue);
             energy.GetComponent<Light>().color = Color.blue;
         }
         while (numberOfCollectibles > 0)

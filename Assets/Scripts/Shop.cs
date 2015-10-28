@@ -30,5 +30,46 @@ public class Shop : MonoBehaviour {
         {
             Application.LoadLevel("MainMenu");
         }
+        if (GUI.Button(new Rect(Screen.width/1.35f, Screen.height/3.8f, 120, 30), "100 Dark energy"))
+        {
+            if (Player.darkEnergy >= 100)
+            {
+                Player.darkEnergy -= 100;
+                Player.score -= 100;
+                Player.isDark = true;
+                Player.isLight = false;
+                Player.saveProgress();
+                darkText = GameObject.Find("DarkEnergyCount").GetComponent<TextMesh>();
+                darkText.text = "x  " + Player.darkEnergy;
+            } else
+            {
+                // Doesn't work on Android
+                /*
+                EditorUtility.DisplayDialog("Not enough energy!",
+                "You haven't collected enough dark energy yet! Collect more!", "OK");
+                */
+            }
+        }
+        if (GUI.Button(new Rect(Screen.width/1.35f, Screen.height/1.9f, 120, 30), "100 Light energy"))
+        {
+            if (Player.lightEnergy >= 100)
+            {
+                Player.lightEnergy -= 100;
+                Player.score -= 100;
+                Player.isDark = false;
+                Player.isLight = true;
+                Player.saveProgress();
+                lightText = GameObject.Find("LightEnergyCount").GetComponent<TextMesh>();
+                lightText.text = "x  " + Player.lightEnergy;
+            }
+            else
+            {
+                // Doesn't work on Android
+                /*
+                EditorUtility.DisplayDialog("Not enough energy!",
+                "You haven't collected enough light energy yet! Collect more!", "OK");
+                */
+            }
+        }
     }
 }
