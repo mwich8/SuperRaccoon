@@ -58,13 +58,20 @@
      <Compile Include="Assets\Scripts\RaccoonGUI.cs" />
      <Compile Include="Assets\Scripts\RemoteConnection.cs" />
      <Compile Include="Assets\Scripts\ScreenStream.cs" />
+     <Compile Include="Assets\Scripts\Shop.cs" />
      <Compile Include="Assets\Scripts\Utils.cs" />
      <Compile Include="Assets\Scripts\WebCamStreamer.cs" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

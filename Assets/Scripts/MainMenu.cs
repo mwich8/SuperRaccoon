@@ -51,11 +51,12 @@ public class MainMenu : MonoBehaviour {
         if (GUI.Button(new Rect((Screen.width/2) - (buttonWidth/2), 120, 150, 30), "Start"))
         {
             Debug.Log("Start game!");
-            Application.LoadLevel("mainScene");
+            Application.LoadLevel("MainScene");
         }
         if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 180, 150, 30), "Shop"))
         {
             Debug.Log("Go to shop");
+            Application.LoadLevel("Shop");
         }
         if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 240, 150, 30), "Credits"))
         {
