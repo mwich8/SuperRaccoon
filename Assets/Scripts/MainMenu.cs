@@ -3,8 +3,8 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-    private float buttonWidth = 150f;
-    private float buttonHeight = 30f;
+    private float buttonWidth = Screen.width/4;
+    private float buttonHeight = Screen.height/8;
 
     public GameObject superRaccoonLogo;
 
@@ -16,8 +16,9 @@ public class MainMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        transform.localScale = new Vector3(Camera.main.orthographicSize / 2 * (Screen.width / Screen.height), 1f, Camera.main.orthographicSize / 4);
+    }
 	
 	// Makes the logo wiggling
 	void Update () {
@@ -47,15 +48,15 @@ public class MainMenu : MonoBehaviour {
     // Creates the buttons and is responsible for the major scene handling
     void OnGUI()
     {
-        if (GUI.Button(new Rect((Screen.width/2) - (buttonWidth/2), 120, buttonWidth, buttonHeight), "Start"))
+        if (GUI.Button(new Rect((Screen.width/2) - (buttonWidth/2), Screen.height - (buttonHeight * 6), buttonWidth, buttonHeight), "Start"))
         {
             Application.LoadLevel("MainScene");
         }
-        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 180, buttonWidth, buttonHeight), "Shop"))
+        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), Screen.height - (buttonHeight * 4), buttonWidth, buttonHeight), "Shop"))
         {
             Application.LoadLevel("Shop");
         }
-        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), 240, buttonWidth, buttonHeight), "Credits"))
+        if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), Screen.height - (buttonHeight*2), buttonWidth, buttonHeight), "Credits"))
         {
             Application.LoadLevel("Credits");
         }

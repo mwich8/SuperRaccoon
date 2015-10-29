@@ -96,7 +96,7 @@ GameObject:
   - 23: {fileID: 245688492}
   - 102: {fileID: 245688491}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

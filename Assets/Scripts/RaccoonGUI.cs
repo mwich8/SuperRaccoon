@@ -9,6 +9,9 @@ public class RaccoonGUI : MonoBehaviour {
 
     private Vector3 startScale = new Vector3(0.25f, 1, 0.25f);
 
+    private float buttonWidth = Screen.width / 4;
+    private float buttonHeight = Screen.height / 16;
+
     // Need a delayed start because otherwise "score" is set to null ==> division by zero = BAD!
     IEnumerator Start()
     {
@@ -57,7 +60,7 @@ public class RaccoonGUI : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 80, 30), "Main Menu"))
+        if (GUI.Button(new Rect(buttonHeight / 2, buttonHeight / 2, buttonWidth, buttonHeight), "Main Menu"))
         {
             Player.saveProgress();
             Application.LoadLevel("MainMenu");

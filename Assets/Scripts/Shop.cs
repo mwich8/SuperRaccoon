@@ -9,8 +9,14 @@ public class Shop : MonoBehaviour {
     public TextMesh darkText;
     public TextMesh lightText;
 
-	// Use this for initialization
-	void Start () {
+    private float buttonWidth = Screen.width / 4;
+    private float buttonHeight = Screen.height / 8;
+
+    // Use this for initialization
+    void Start () {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        transform.localScale = new Vector3(Camera.main.orthographicSize / 2 * (Screen.width / Screen.height), 1f, Camera.main.orthographicSize / 4);
+        // darkEnergy.transform.position = new Vector3(-Camera.main.orthographicSize, darkEnergy.transform.position.y, darkEnergy.transform.position.z);
         Player.loadProgress();
         darkText = GameObject.Find("DarkEnergyCount").GetComponent<TextMesh>();
         darkText.text = "x  " + Player.darkEnergy;
@@ -26,11 +32,11 @@ public class Shop : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, Screen.height-40, 50, 30), "Back"))
+        if (GUI.Button(new Rect(buttonHeight/2, Screen.height-(buttonHeight * 1.5f), buttonWidth/2, buttonHeight), "Back"))
         {
             Application.LoadLevel("MainMenu");
         }
-        if (GUI.Button(new Rect(Screen.width/1.35f, Screen.height/3.8f, 120, 30), "100 Dark energy"))
+        if (GUI.Button(new Rect(Screen.width - (buttonWidth * 1.25f), buttonHeight * 2, buttonWidth, buttonHeight), "100 Dark energy"))
         {
             if (Player.darkEnergy >= 100)
             {
@@ -50,7 +56,7 @@ public class Shop : MonoBehaviour {
                 */
             }
         }
-        if (GUI.Button(new Rect(Screen.width/1.35f, Screen.height/1.9f, 120, 30), "100 Light energy"))
+        if (GUI.Button(new Rect(Screen.width - (buttonWidth * 1.25f), buttonHeight * 4, buttonWidth, buttonHeight), "100 Light energy"))
         {
             if (Player.lightEnergy >= 100)
             {
