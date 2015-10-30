@@ -10,10 +10,12 @@ public class Background : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        /*
         transform.Translate(-0.05f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
         if (transform.position.x <= -30)
         {
             transform.position = new Vector3(transform.position.x + 60, 0, 100);
         }
+        */
     }
 }

@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\GenerateCollectibles.cs" />
      <Compile Include="Assets\Scripts\GenerateObstacles.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\MainSceneLayout.cs" />
      <Compile Include="Assets\Scripts\Obstacles.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\RaccoonGUI.cs" />

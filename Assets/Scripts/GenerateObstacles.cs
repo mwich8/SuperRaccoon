@@ -15,8 +15,8 @@ public class GenerateObstacles : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        dice.transform.position = new Vector3(15.76f, -7.15f);
-        table.transform.position = new Vector3(17.72f, -7.9f);
+        dice.transform.position = new Vector3(15.76f, -7.1f);
+        table.transform.position = new Vector3(17.72f, -8f);
     }
 
     // Update is called once per frame

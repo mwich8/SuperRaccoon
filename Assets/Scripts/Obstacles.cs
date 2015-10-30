@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Obstacles : MonoBehaviour {
 
-    private float speed = 0.08f;
+    private float speed = 0.05f;
 
     private int numberOfTurns;
     private int rotateAroundY;

@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
     void Start () {
         loadProgress();
         textObject = GameObject.Find("Score").GetComponent<TextMesh>();
+        textObject.text = "Score: " + Player.score;
         animator = gameObject.GetComponentInChildren<Animator>();
     }
 	
@@ -43,12 +44,12 @@ public class Player : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x, -7.4f, transform.position.z);
         }
-        if (Input.touchCount > 0 && state == State.normal && Input.GetTouch(0).phase == TouchPhase.Ended)
+        if ((Input.touchCount > 0 && state == State.normal && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetKeyDown("space"))
         {
             print("Single");
             GetComponent<Rigidbody>().velocity = new Vector3(0, jumpHeight, 0);
         }
-        if (Input.touchCount > 0 && state == State.jumping && Input.GetTouch(0).phase == TouchPhase.Ended)
+        if ((Input.touchCount > 0 && state == State.jumping && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetKeyDown("space"))
         {
             print("Double");
             if (isDark)
@@ -129,7 +130,7 @@ public class Player : MonoBehaviour {
             }
             score++;
             textObject.text = "Score: " + Player.score;
-            coll.gameObject.GetComponent<Collectibles>().SimpleMethod();
+            coll.gameObject.GetComponent<Collectibles>().PickUp();
         }
     }
 
