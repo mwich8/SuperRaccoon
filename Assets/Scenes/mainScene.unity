@@ -517,6 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219cf39d3fc5c52408bd75a4ec179bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avengersFont: {fileID: 12800000, guid: 9dea682e065d2ed4b8e9427c2eb9daa5, type: 3}
 --- !u!54 &971763892
 Rigidbody:
   m_ObjectHideFlags: 0

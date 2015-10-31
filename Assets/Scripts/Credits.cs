@@ -42,12 +42,14 @@ public class Credits : MonoBehaviour {
     {
         GUIStyle superGUIStyle = new GUIStyle();
         superGUIStyle.font = avengersFont;
-        superGUIStyle.fontSize = 20;
+        superGUIStyle.fontSize = 15;
         superGUIStyle.normal.textColor = new Color(168f / 255f, 29f / 255f, 29f / 255f);
-        if (GUI.Button(new Rect(buttonHeight / 2, Screen.height - (buttonHeight * 1.5f), buttonWidth / 2, buttonHeight), resizedButton, superGUIStyle))
+        float fontScaleX = "Back".Length * (superGUIStyle.fontSize * 0.3f);
+        float offsetY = (buttonHeight - superGUIStyle.fontSize) / 2;
+        if (GUI.Button(new Rect(buttonHeight / 2, Screen.height - (buttonHeight * 1.5f), buttonWidth/2, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("MainMenu");
         }
-        GUI.Button(new Rect(buttonHeight / 2, Screen.height - (buttonHeight * 1.5f), buttonWidth / 2, buttonHeight), "Back", superGUIStyle);
+        GUI.Button(new Rect(buttonHeight / 2 + (fontScaleX / 2), Screen.height - (buttonHeight * 1.5f) + offsetY, 0, 0), "Back", superGUIStyle);
     }
 }

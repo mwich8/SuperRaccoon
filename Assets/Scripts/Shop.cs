@@ -6,24 +6,85 @@ public class Shop : MonoBehaviour {
     public GameObject darkEnergy;
     public GameObject lightEnergy;
 
-    public TextMesh darkText;
-    public TextMesh lightText;
+    public TextMesh darkCounterText;
+    public TextMesh lightCounterText;
+    public TextMesh darkUpgrade1Text;
+    public TextMesh lightUpgrade1Text;
+    public TextMesh currentPowerText;
 
     private float buttonWidth;
     private float buttonHeight;
 
+    public static float screenHeight;
+    public static float screenRatioXtoY;
+    public static float actualScreenWidth;
+
+    public Font avengersFont;
+    private Texture2D resizedButton;
+
+    private string[] buttonMessages = new string[3];
+    private int[] buttonLength = new int[3];
+
     // Use this for initialization
     void Start () {
+        screenHeight = Camera.main.orthographicSize;
+        screenRatioXtoY = (float)Screen.width / (float)Screen.height;
+        actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
+        // Set Screen orientation and scales background to fit screen size
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        transform.localScale = new Vector3(Camera.main.orthographicSize / 2 * (Screen.width / Screen.height), 1f, Camera.main.orthographicSize / 4);
+        transform.localScale = new Vector3((screenHeight * screenRatioXtoY) / 5, 1, screenHeight / 5);
+        // Load saveGame 
         Player.loadProgress();
-        darkText = GameObject.Find("DarkEnergyCount").GetComponent<TextMesh>();
-        darkText.text = "x  " + Player.darkEnergy;
-        lightText = GameObject.Find("LightEnergyCount").GetComponent<TextMesh>();
-        lightText.text = "x  " + Player.lightEnergy;
-        buttonWidth = Screen.width / 4;
-        buttonHeight = Screen.height / 8;
-}
+        updateStatusOfCoon();
+        // Sets up the text which display the amount of energy which was collected
+        darkCounterText = GameObject.Find("DarkEnergyCount").GetComponent<TextMesh>();
+        darkCounterText.text = Player.darkEnergy.ToString();
+        lightCounterText = GameObject.Find("LightEnergyCount").GetComponent<TextMesh>();
+        lightCounterText.text = Player.lightEnergy.ToString();
+        // Pre(Calculations)
+        float energyAndTextZ = -7f;
+        darkUpgrade1Text.text = "Stamp";
+        lightUpgrade1Text.text = "D-Jump";
+        // Transforms position of energySpheres
+        darkEnergy.transform.position = new Vector3((-actualScreenWidth / 2) * 0.9f, screenHeight / 2, energyAndTextZ);
+        lightEnergy.transform.position = new Vector3((actualScreenWidth / 2) * 0.9f, screenHeight / 2, energyAndTextZ);
+        // Transforms position of counters
+        darkCounterText.transform.position = new Vector3(darkEnergy.transform.position.x + darkEnergy.transform.localScale.x, darkEnergy.transform.position.y + darkEnergy.transform.localScale.y / 2, energyAndTextZ);
+        lightCounterText.transform.position = new Vector3(lightEnergy.transform.position.x - lightCounterText.text.Length*1.5f, lightEnergy.transform.position.y + lightEnergy.transform.localScale.y / 1.5f, energyAndTextZ);
+        // Transforms position of upgrade texts
+        darkUpgrade1Text.transform.position = new Vector3(darkEnergy.transform.position.x, 0, energyAndTextZ);
+        lightUpgrade1Text.transform.position = new Vector3(actualScreenWidth / 4, 0, energyAndTextZ);
+        // Transforms position of currentPowerText
+        currentPowerText.transform.position = new Vector3(-currentPowerText.text.Length/2, darkCounterText.transform.position.y, energyAndTextZ);
+        buttonWidth = Screen.width / 5;
+        buttonHeight = Screen.height / 7;
+        // Resizes button and colors it
+        int borderSize = 5;
+        Color32 borderColor = new Color32(168, 29, 29, 255);
+        resizedButton = new Texture2D((int)buttonWidth, (int)buttonHeight);
+        for (int x = 0; x <= resizedButton.width; x++)
+        {
+            for (int y = 0; y <= resizedButton.height; y++)
+            {
+                if (x < borderSize || y < borderSize || x > resizedButton.width - borderSize || y > resizedButton.height - borderSize)
+                {
+                    resizedButton.SetPixel(x, y, borderColor);
+                }
+                else
+                {
+                    resizedButton.SetPixel(x, y, Color.yellow);
+                }
+            }
+        }
+        resizedButton.Apply();
+        buttonMessages[0] = "Back";
+        buttonMessages[1] = "Buy";
+        buttonMessages[2] = "100 LightEnergy";
+        for (int i = 0; i <= 2; i++)
+        {
+            buttonLength[i] = buttonMessages[i].Length;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,11 +94,18 @@ public class Shop : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(buttonHeight/2, Screen.height-(buttonHeight * 1.5f), buttonWidth/2, buttonHeight), "Back"))
+        GUIStyle superGUIStyle = new GUIStyle();
+        superGUIStyle.font = avengersFont;
+        superGUIStyle.fontSize = 30;
+        superGUIStyle.normal.textColor = new Color(168f / 255f, 29f / 255f, 29f / 255f);
+        float fontScaleX = superGUIStyle.fontSize * 0.2f;
+        float offsetY = (buttonHeight - superGUIStyle.fontSize * 0.8f) / 2;
+        if (GUI.Button(new Rect(buttonHeight / 4, Screen.height - (buttonHeight * 1.25f), buttonWidth, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("MainMenu");
         }
-        if (GUI.Button(new Rect(Screen.width - (buttonWidth * 1.25f), buttonHeight * 2, buttonWidth, buttonHeight), "100 Dark energy"))
+        GUI.Button(new Rect((buttonHeight / 4) + (buttonLength[0] * fontScaleX)/2, Screen.height - (buttonHeight * 1.25f) + offsetY, 0, 0), buttonMessages[0], superGUIStyle);
+        if (GUI.Button(new Rect(buttonWidth*1.5f, Screen.height/2 - buttonHeight/3, buttonWidth/1.25f, buttonHeight/1.25f), resizedButton, superGUIStyle))
         {
             if (Player.darkEnergy >= 100)
             {
@@ -46,8 +114,9 @@ public class Shop : MonoBehaviour {
                 Player.isDark = true;
                 Player.isLight = false;
                 Player.saveProgress();
-                darkText = GameObject.Find("DarkEnergyCount").GetComponent<TextMesh>();
-                darkText.text = "x  " + Player.darkEnergy;
+                darkCounterText = GameObject.Find("DarkEnergyCount").GetComponent<TextMesh>();
+                darkCounterText.text = Player.darkEnergy.ToString();
+                updateStatusOfCoon();
             } else
             {
                 // Doesn't work on Android
@@ -57,7 +126,12 @@ public class Shop : MonoBehaviour {
                 */
             }
         }
-        if (GUI.Button(new Rect(Screen.width - (buttonWidth * 1.25f), buttonHeight * 4, buttonWidth, buttonHeight), "100 Light energy"))
+        // Resizing font for smaller buttons
+        superGUIStyle.fontSize = (int)((float)superGUIStyle.fontSize / 1.25f);
+        fontScaleX = superGUIStyle.fontSize * 0.3f;
+        offsetY = (buttonHeight - superGUIStyle.fontSize * 0.8f)/3;
+        GUI.Button(new Rect(buttonWidth* 1.5f + (buttonLength[1] * fontScaleX) / 2, Screen.height/2 - buttonHeight/3 + offsetY, 0, 0), buttonMessages[1], superGUIStyle);
+        if (GUI.Button(new Rect(Screen.width/2, Screen.height / 2 - buttonHeight / 3, buttonWidth / 1.25f, buttonHeight / 1.25f), resizedButton, superGUIStyle))
         {
             if (Player.lightEnergy >= 100)
             {
@@ -66,8 +140,9 @@ public class Shop : MonoBehaviour {
                 Player.isDark = false;
                 Player.isLight = true;
                 Player.saveProgress();
-                lightText = GameObject.Find("LightEnergyCount").GetComponent<TextMesh>();
-                lightText.text = "x  " + Player.lightEnergy;
+                lightCounterText = GameObject.Find("LightEnergyCount").GetComponent<TextMesh>();
+                lightCounterText.text = Player.lightEnergy.ToString();
+                updateStatusOfCoon();
             }
             else
             {
@@ -77,6 +152,27 @@ public class Shop : MonoBehaviour {
                 "You haven't collected enough light energy yet! Collect more!", "OK");
                 */
             }
+        }
+        GUI.Button(new Rect(Screen.width / 2 + (buttonLength[1] * fontScaleX) / 2, Screen.height / 2 - buttonHeight / 3 + offsetY, 0, 0), buttonMessages[1], superGUIStyle);
+    }
+
+    void updateStatusOfCoon()
+    {
+        // Set up the current power of the player
+        if (Player.isDark)
+        {
+            currentPowerText.text = "Dark Coon";
+            currentPowerText.color = new Color32(168, 29, 29, 255);
+        }
+        else if (Player.isLight)
+        {
+            currentPowerText.text = "Light Coon";
+            currentPowerText.color = new Color32(35, 0, 219, 255);
+        }
+        else
+        {
+            currentPowerText.text = "No Power";
+            currentPowerText.color = Color.white;
         }
     }
 }

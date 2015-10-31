@@ -94,16 +94,16 @@ public class MainMenu : MonoBehaviour {
         {
             Application.LoadLevel("MainScene");
         }
-        GUI.Button(new Rect((Screen.width / 2) - (buttonLength[0] * fontScaleX) , Screen.height - (buttonHeight * 6) + offsetY, 0, 0), "Start", superGUIStyle);
+        GUI.Button(new Rect((Screen.width / 2) - (buttonLength[0] * fontScaleX) , Screen.height - (buttonHeight * 6) + offsetY, 0, 0), buttonMessages[0], superGUIStyle);
         if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), Screen.height - (buttonHeight * 4), buttonWidth, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("Shop");
         }
-        GUI.Button(new Rect((Screen.width / 2) - (buttonLength[1] * fontScaleX), Screen.height - (buttonHeight * 4) + offsetY, 0, 0), "Shop", superGUIStyle);
+        GUI.Button(new Rect((Screen.width / 2) - (buttonLength[1] * fontScaleX), Screen.height - (buttonHeight * 4) + offsetY, 0, 0), buttonMessages[1], superGUIStyle);
         if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), Screen.height - (buttonHeight * 2), buttonWidth, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("Credits");
         }
-        GUI.Button(new Rect((Screen.width / 2) - (buttonLength[2] * fontScaleX), Screen.height - (buttonHeight * 2) + offsetY, 0, 0), "Credits", superGUIStyle);
+        GUI.Button(new Rect((Screen.width / 2) - (buttonLength[2] * fontScaleX), Screen.height - (buttonHeight * 2) + offsetY, 0, 0), buttonMessages[2], superGUIStyle);
     }
 }
