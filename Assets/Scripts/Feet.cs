@@ -32,10 +32,10 @@ public class Feet : MonoBehaviour {
             Player.state = Player.State.normal;
         }
     }
-
+    
     void OnCollisionExit(Collision col)
     {
-        if (col.gameObject.tag == "Platform" || col.gameObject.tag == "Obstacle")
+        if (col.gameObject.tag == "Obstacle")
         {
             Player.state = Player.State.jumping;
         }

@@ -95,7 +95,6 @@ public class RaccoonGUI : MonoBehaviour {
         superGUIStyle.font = avengersFont;
         superGUIStyle.fontSize = 15;
         superGUIStyle.normal.textColor = new Color(168f / 255f, 29f / 255f, 29f / 255f);
-        float fontScaleX = "Main Menu".Length * (superGUIStyle.fontSize * 0.3f);
         float offsetY = (buttonHeight - superGUIStyle.fontSize);
         if (GUI.Button(new Rect(buttonHeight / 2, buttonHeight / 2, buttonWidth, buttonHeight), resizedButton, superGUIStyle))
         {

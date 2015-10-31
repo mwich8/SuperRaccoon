@@ -44,7 +44,7 @@ public class Collectibles : MonoBehaviour {
             oneDirection = amountMovingY;
             isMovingUpwards = !isMovingUpwards;
         }
-        if (transform.position.x <= -15.5f || transform.position.y >= 11f)
+        if (transform.position.x <= -(MainSceneLayout.actualScreenWidth / 2) - gameObject.transform.localScale.y || transform.position.y >= 11f)
         {
             Destroy(gameObject);
         }
