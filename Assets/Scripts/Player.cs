@@ -30,6 +30,9 @@ public class Player : MonoBehaviour {
     public static bool isDark = false;
     public static bool isLight = false;
 
+    public GameObject lightParticle;
+    public GameObject darkParticle;
+
     // Use this for initialization
     void Start () {
         loadProgress();
@@ -44,25 +47,31 @@ public class Player : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x, -7.4f, transform.position.z);
         }
-        if ((Input.touchCount > 0 && state == State.normal && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetKeyDown("space"))
+        if ((Input.touchCount > 0 && state == State.normal && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetKeyDown("space") && state == State.normal)
         {
             print("Single");
             GetComponent<Rigidbody>().velocity = new Vector3(0, jumpHeight, 0);
         }
-        if ((Input.touchCount > 0 && state == State.jumping && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetKeyDown("space"))
+        else if ((Input.touchCount > 0 && state == State.jumping && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetKeyDown("space") && state == State.jumping)
         {
             print("Double");
             if (isDark)
             {
                 print("Dark");
+                GameObject particle = (GameObject)Instantiate(darkParticle);
+                particle.transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
                 GetComponent<Rigidbody>().velocity = new Vector3(0, -jumpHeight, 0);
                 state = State.stamping;
+                Destroy(particle, 0.5f);
             }
             if (isLight)
             {
                 print("Light");
+                GameObject particle = (GameObject)Instantiate(lightParticle);
+                particle.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
                 GetComponent<Rigidbody>().velocity = new Vector3(0, jumpHeight, 0);
                 state = State.flying;
+                Destroy(particle, 0.5f);
             }
         }
 

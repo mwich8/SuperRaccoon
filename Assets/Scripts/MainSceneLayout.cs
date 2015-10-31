@@ -7,7 +7,7 @@ public class MainSceneLayout : MonoBehaviour {
 
     private float screenHeight;
     private float screenRatioXtoY;
-    private float actualScreenWidth;
+    public static float actualScreenWidth;
 
 	// Use this for initialization
 	void Start () {

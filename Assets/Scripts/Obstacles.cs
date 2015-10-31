@@ -19,6 +19,7 @@ public class Obstacles : MonoBehaviour {
             gameObject.transform.Rotate(90 * numberOfTurns, 90 * numberOfTurns * rotateAroundY, 0, Space.World);
             GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         }
+        print(gameObject.name + gameObject.transform.localScale.y);
     }
 
     // Update is called once per frame
@@ -26,10 +27,10 @@ public class Obstacles : MonoBehaviour {
         // Set movement speed of the obstacles
         transform.Translate(-speed-(Mathf.Sqrt(Player.score))/100, 0, 0, Space.World);
         // Destruction of obstacles
-        if (transform.position.x < -15.5f && gameObject.name == "Dice(Clone)")
+        if (transform.position.x < -(MainSceneLayout.actualScreenWidth/2) - gameObject.transform.localScale.y && gameObject.name == "Dice(Clone)")
         {
             Destroy(gameObject);
-        } else if (transform.position.x < -17.72f && gameObject.name == "Table(Clone)")
+        } else if (transform.position.x < -(MainSceneLayout.actualScreenWidth / 2) - gameObject.transform.localScale.y * 2 && gameObject.name == "Table(Clone)")
         {
             Destroy(gameObject);
         }

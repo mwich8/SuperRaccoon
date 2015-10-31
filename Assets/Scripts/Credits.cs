@@ -8,8 +8,10 @@ public class Credits : MonoBehaviour {
 
     void Start()
     {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-        transform.localScale = new Vector3(Camera.main.orthographicSize / 2 * (Screen.width / Screen.height), 1f, Camera.main.orthographicSize / 4);
+        float screenHeight = Camera.main.orthographicSize;
+        float screenRatioXtoY = (float)Screen.width / (float)Screen.height;
+        float actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
+        transform.localScale = new Vector3(actualScreenWidth/10, 1f, screenHeight/5);
     }
 
     void OnGUI()
