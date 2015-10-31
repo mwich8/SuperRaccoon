@@ -111,7 +111,8 @@ TextMesh:
   m_GameObject: {fileID: 245688490}
   m_Text: "RaccoonFace: https://www.pinterest.com/vicrivera/whispering-woods/\r\nUrban
     Landscape: http://opengameart.org/content/urban-landscape\r\nTable: https://www.assetstore.unity3d.com/en/#!/content/11859\r\nFont:
-    http://www.fontspace.com/the-fontry/avengeance"
+    http://www.fontspace.com/the-fontry/avengeance\nDarkCoonMusic: zRy - Jenemy Finale\nLightCoonMusic:
+    carezz - Walk on By\nDefaultCoonMusic: Fred M8 Beats - Blood (Dexter)"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -277,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f50c784706bfb843b9170ed3389424d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avengersFont: {fileID: 12800000, guid: 9dea682e065d2ed4b8e9427c2eb9daa5, type: 3}
 --- !u!23 &1026181165
 MeshRenderer:
   m_ObjectHideFlags: 0

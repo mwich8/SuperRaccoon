@@ -7,30 +7,31 @@ public class GenerateObstacles : MonoBehaviour {
     public GameObject dice;
     public GameObject table;
 
-    private float randomNumber;
+    private float nextObstacleInSecs;
 
     private float fastSpawn = 1.0f;
     private float slowSpawn = 2.0f;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
-        dice.transform.position = new Vector3(15.76f, -7.1f);
-        table.transform.position = new Vector3(17.72f, -8f);
+        yield return new WaitForSeconds(0.001f);
+        float platformHeight = GetComponent<MainSceneLayout>().platform1.transform.localScale.y;
+        float dicePosY = -MainSceneLayout.screenHeight + platformHeight + dice.transform.localScale.y;
+        float tablePosY = -MainSceneLayout.screenHeight + platformHeight;
+        dice.transform.position = new Vector3((MainSceneLayout.actualScreenWidth / 2) + dice.transform.localScale.x, dicePosY);
+        table.transform.position = new Vector3((MainSceneLayout.actualScreenWidth / 2) + table.transform.localScale.x, tablePosY);
     }
 
     // Update is called once per frame
     void Update () {
-        if (randomNumber > 0)
+        if (nextObstacleInSecs > 0)
         {
-            randomNumber -= Time.deltaTime;
+            nextObstacleInSecs -= Time.deltaTime;
         } else
         {
-            // fastSpawn += (Mathf.Sqrt(Player.score)) / 100;
-            // slowSpawn += (Mathf.Sqrt(Player.score)) / 100;
             StartCoroutine(GenerateObstacle());
-            // Invoke("GenerateObstacle", 0);
-            randomNumber = Random.Range(fastSpawn, slowSpawn);
+            nextObstacleInSecs = Random.Range(fastSpawn, slowSpawn);
         }
 
     }

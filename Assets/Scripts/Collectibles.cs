@@ -14,23 +14,17 @@ public class Collectibles : MonoBehaviour {
 
     private bool isMovingUpwards = false;
 
-    private float screenHeight, screenRatioXtoY, actualScreenWidth;
-
     // Use this for initialization
     IEnumerator Start () {
         yield return new WaitForSeconds(0.001f);
-        // CARE!!! Hardcoded values here, copy&pasted from MainSceneLayout
-        screenHeight = Camera.main.orthographicSize;
-        screenRatioXtoY = (float)Screen.width / (float)Screen.height;
-        actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
-        raccoonGUIPosition = new Vector3((actualScreenWidth / 2) - 2, screenHeight - 2, -2);
+        raccoonGUIPosition = new Vector3((MainSceneLayout.actualScreenWidth / 2) - 2, MainSceneLayout.screenHeight - 2, -2);
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (!wasCollected)
         {
-            transform.Translate(-0.08f - (Mathf.Sqrt(Player.score)) / 100, 0, 0, Space.World);
+            transform.Translate(MainSceneLayout.actualSpeed, 0, 0, Space.World);
         } else
         {
             transform.position = Vector3.Lerp(gameObject.transform.position, raccoonGUIPosition, 0.075f);
@@ -54,7 +48,7 @@ public class Collectibles : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        if ((transform.position.x >= (actualScreenWidth / 2) - 2 || transform.position.y >= screenHeight - 2) && wasCollected)
+        if ((transform.position.x >= (MainSceneLayout.actualScreenWidth / 2) - 2 || transform.position.y >= MainSceneLayout.screenHeight - 2) && wasCollected)
         {
             Destroy(gameObject);
         }

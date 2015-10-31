@@ -9,20 +9,21 @@ public class Shop : MonoBehaviour {
     public TextMesh darkText;
     public TextMesh lightText;
 
-    private float buttonWidth = Screen.width / 4;
-    private float buttonHeight = Screen.height / 8;
+    private float buttonWidth;
+    private float buttonHeight;
 
     // Use this for initialization
     void Start () {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         transform.localScale = new Vector3(Camera.main.orthographicSize / 2 * (Screen.width / Screen.height), 1f, Camera.main.orthographicSize / 4);
-        // darkEnergy.transform.position = new Vector3(-Camera.main.orthographicSize, darkEnergy.transform.position.y, darkEnergy.transform.position.z);
         Player.loadProgress();
         darkText = GameObject.Find("DarkEnergyCount").GetComponent<TextMesh>();
         darkText.text = "x  " + Player.darkEnergy;
         lightText = GameObject.Find("LightEnergyCount").GetComponent<TextMesh>();
         lightText.text = "x  " + Player.lightEnergy;
-    }
+        buttonWidth = Screen.width / 4;
+        buttonHeight = Screen.height / 8;
+}
 	
 	// Update is called once per frame
 	void Update () {

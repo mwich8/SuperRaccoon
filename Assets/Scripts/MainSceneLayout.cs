@@ -5,15 +5,33 @@ public class MainSceneLayout : MonoBehaviour {
 
     public GameObject raccoonGUI, player, score, background, sky1, sky2, platform1, platform2;
 
-    private float screenHeight;
-    private float screenRatioXtoY;
+    public static float screenHeight;
+    public static float screenRatioXtoY;
     public static float actualScreenWidth;
+
+    public static float actualSpeed;
+
+    public AudioClip darkSound;
+    public AudioClip lightSound;
+    public AudioClip defaultSound;
 
 	// Use this for initialization
 	void Start () {
         screenHeight = Camera.main.orthographicSize;
         screenRatioXtoY = (float)Screen.width / (float)Screen.height;
         actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
+        Player.loadProgress();
+        actualSpeed = -0.05f - ((Mathf.Sqrt(Player.score)) / 100);
+        if(Player.isDark)
+        {
+            GetComponent<AudioSource>().PlayOneShot(darkSound);
+        } else if (Player.isLight)
+        {
+            GetComponent<AudioSource>().PlayOneShot(lightSound);
+        } else
+        {
+            GetComponent<AudioSource>().PlayOneShot(defaultSound);
+        }
         // Platform scaling and positioning
         platform1.transform.localScale = new Vector3(actualScreenWidth, screenHeight / 4.5f, screenHeight / 3);
         platform1.transform.position = new Vector3(0, -screenHeight + platform1.transform.localScale.y / 2, 0);

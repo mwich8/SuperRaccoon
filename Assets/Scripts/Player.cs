@@ -118,7 +118,7 @@ public class Player : MonoBehaviour {
             if (Vector3.Dot(col.contacts[0].normal, -Vector3.up) > -0.5f && Vector3.Dot(col.contacts[0].normal, -Vector3.up) <= 0)
             {
                 saveProgress();
-                Application.LoadLevel("MainScene");
+                Application.LoadLevel("MainMenu");
             }
         }
     }
