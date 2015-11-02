@@ -11,10 +11,13 @@ public class Credits : MonoBehaviour {
 
     void Start()
     {
+        // Calculates the size of the current screen
         float screenHeight = Camera.main.orthographicSize;
         float screenRatioXtoY = (float)Screen.width / (float)Screen.height;
         float actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
+        // Scales the background
         transform.localScale = new Vector3(actualScreenWidth/10, 1f, screenHeight/5);
+        // Sets up the button size w.r.t. the actual screen
         buttonWidth = Screen.width / 4;
         buttonHeight = Screen.height / 16;
         // Resizes button and colors it
@@ -40,12 +43,15 @@ public class Credits : MonoBehaviour {
 
     void OnGUI()
     {
+        // Sets up the GUI style
         GUIStyle superGUIStyle = new GUIStyle();
         superGUIStyle.font = avengersFont;
         superGUIStyle.fontSize = 15;
         superGUIStyle.normal.textColor = new Color(168f / 255f, 29f / 255f, 29f / 255f);
+        // Center the texts in the buttons (at least it should, it more an approximation to be honest)
         float fontScaleX = "Back".Length * (superGUIStyle.fontSize * 0.3f);
         float offsetY = (buttonHeight - superGUIStyle.fontSize) / 2;
+        // Back Button
         if (GUI.Button(new Rect(buttonHeight / 2, Screen.height - (buttonHeight * 1.5f), buttonWidth/2, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("MainMenu");

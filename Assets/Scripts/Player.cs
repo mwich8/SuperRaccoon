@@ -36,6 +36,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         loadProgress();
+        // Displays actual score when the game starts
         textObject = GameObject.Find("Score").GetComponent<TextMesh>();
         textObject.text = "Score: " + Player.score;
         animator = gameObject.GetComponentInChildren<Animator>();

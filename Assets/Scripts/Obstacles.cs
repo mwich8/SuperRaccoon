@@ -24,7 +24,7 @@ public class Obstacles : MonoBehaviour {
     void Update () {
         // Set movement speed of the obstacles
         transform.Translate(MainSceneLayout.actualSpeed, 0, 0, Space.World);
-        // Destruction of obstacles
+        // Destruction of obstacles if they are no longer visible
         if (transform.position.x < -(MainSceneLayout.actualScreenWidth/2) - gameObject.transform.localScale.y && gameObject.name == "Dice(Clone)")
         {
             Destroy(gameObject);

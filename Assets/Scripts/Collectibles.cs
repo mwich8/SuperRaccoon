@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Collectibles : MonoBehaviour {
 
-    private float oneDirection = 1f;
+    private float verticalInterval = 1f;
 
     private float amountMovingY = 1.5f;
     public bool wasCollected = false;
@@ -22,6 +22,7 @@ public class Collectibles : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // Horizontal movement of collectible
         if (!wasCollected)
         {
             transform.Translate(MainSceneLayout.actualSpeed, 0, 0, Space.World);
@@ -29,6 +30,7 @@ public class Collectibles : MonoBehaviour {
         {
             transform.position = Vector3.Lerp(gameObject.transform.position, raccoonGUIPosition, 0.075f);
         }
+        // Wiggling vertically
         if (isMovingUpwards)
         {
             transform.Translate(Vector3.up/200);
@@ -36,14 +38,15 @@ public class Collectibles : MonoBehaviour {
         {
             transform.Translate(Vector3.down/200);
         }
-        if (oneDirection > 0)
+        if (verticalInterval > 0)
         {
-            oneDirection -= Time.deltaTime;
+            verticalInterval -= Time.deltaTime;
         } else
         {
-            oneDirection = amountMovingY;
+            verticalInterval = amountMovingY;
             isMovingUpwards = !isMovingUpwards;
         }
+        // Destroys collectible if it isn't visible anymore
         if (transform.position.x <= -(MainSceneLayout.actualScreenWidth / 2) - gameObject.transform.localScale.y || transform.position.y >= 11f)
         {
             Destroy(gameObject);
@@ -53,7 +56,7 @@ public class Collectibles : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
+    // If a collectible was picked up, used for acessing the "wasCollected" property from outside the class
     public void PickUp()
     {
         wasCollected = true;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// This script is used to transform and scale objects in the mainScene/ the actual game
 public class MainSceneLayout : MonoBehaviour {
 
     public GameObject raccoonGUI, player, score, background, sky1, sky2, platform1, platform2;
@@ -17,11 +18,13 @@ public class MainSceneLayout : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        // Calculates the size of the current screen
         screenHeight = Camera.main.orthographicSize;
         screenRatioXtoY = (float)Screen.width / (float)Screen.height;
         actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
         Player.loadProgress();
         actualSpeed = -0.05f - ((Mathf.Sqrt(Player.score)) / 100);
+        // Determines which lightSource should be played
         if(Player.isDark)
         {
             GetComponent<AudioSource>().PlayOneShot(darkSound);

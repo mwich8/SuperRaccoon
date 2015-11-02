@@ -22,11 +22,12 @@ public class Shop : MonoBehaviour {
     public Font avengersFont;
     private Texture2D resizedButton;
 
-    private string[] buttonMessages = new string[3];
-    private int[] buttonLength = new int[3];
+    private string[] buttonMessages = new string[2];
+    private int[] buttonLength = new int[2];
 
     // Use this for initialization
     void Start () {
+        // Calculates the size of the current screen
         screenHeight = Camera.main.orthographicSize;
         screenRatioXtoY = (float)Screen.width / (float)Screen.height;
         actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
@@ -77,10 +78,11 @@ public class Shop : MonoBehaviour {
             }
         }
         resizedButton.Apply();
+        // Sets up the buttonNames
         buttonMessages[0] = "Back";
         buttonMessages[1] = "Buy";
-        buttonMessages[2] = "100 LightEnergy";
-        for (int i = 0; i <= 2; i++)
+        // Gets the length of each button-name
+        for (int i = 0; i <= buttonMessages.Length; i++)
         {
             buttonLength[i] = buttonMessages[i].Length;
         }
@@ -88,23 +90,33 @@ public class Shop : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // Rotate the energy spheres
         darkEnergy.transform.Rotate(Vector3.up, Space.Self);
         lightEnergy.transform.Rotate(Vector3.up, Space.Self);
     }
 
     void OnGUI()
     {
+        // Sets up the GUI style
         GUIStyle superGUIStyle = new GUIStyle();
         superGUIStyle.font = avengersFont;
         superGUIStyle.fontSize = 30;
         superGUIStyle.normal.textColor = new Color(168f / 255f, 29f / 255f, 29f / 255f);
+        // Center the texts in the buttons (at least it should, it more an approximation to be honest)
         float fontScaleX = superGUIStyle.fontSize * 0.2f;
         float offsetY = (buttonHeight - superGUIStyle.fontSize * 0.8f) / 2;
+        // Back Button
         if (GUI.Button(new Rect(buttonHeight / 4, Screen.height - (buttonHeight * 1.25f), buttonWidth, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("MainMenu");
         }
         GUI.Button(new Rect((buttonHeight / 4) + (buttonLength[0] * fontScaleX)/2, Screen.height - (buttonHeight * 1.25f) + offsetY, 0, 0), buttonMessages[0], superGUIStyle);
+        // Buy buttons
+        // Resizing font for smaller buttons
+        superGUIStyle.fontSize = (int)((float)superGUIStyle.fontSize / 1.25f);
+        fontScaleX = superGUIStyle.fontSize * 0.3f;
+        offsetY = (buttonHeight - superGUIStyle.fontSize * 0.8f) / 3;
+        // Buy Button for dark power
         if (GUI.Button(new Rect(buttonWidth*1.5f, Screen.height/2 - buttonHeight/3, buttonWidth/1.25f, buttonHeight/1.25f), resizedButton, superGUIStyle))
         {
             if (Player.darkEnergy >= 100)
@@ -126,11 +138,8 @@ public class Shop : MonoBehaviour {
                 */
             }
         }
-        // Resizing font for smaller buttons
-        superGUIStyle.fontSize = (int)((float)superGUIStyle.fontSize / 1.25f);
-        fontScaleX = superGUIStyle.fontSize * 0.3f;
-        offsetY = (buttonHeight - superGUIStyle.fontSize * 0.8f)/3;
         GUI.Button(new Rect(buttonWidth* 1.5f + (buttonLength[1] * fontScaleX) / 2, Screen.height/2 - buttonHeight/3 + offsetY, 0, 0), buttonMessages[1], superGUIStyle);
+        // Buy Button for dark power
         if (GUI.Button(new Rect(Screen.width/2, Screen.height / 2 - buttonHeight / 3, buttonWidth / 1.25f, buttonHeight / 1.25f), resizedButton, superGUIStyle))
         {
             if (Player.lightEnergy >= 100)
@@ -156,9 +165,9 @@ public class Shop : MonoBehaviour {
         GUI.Button(new Rect(Screen.width / 2 + (buttonLength[1] * fontScaleX) / 2, Screen.height / 2 - buttonHeight / 3 + offsetY, 0, 0), buttonMessages[1], superGUIStyle);
     }
 
+    // Set up the current power of the player
     void updateStatusOfCoon()
     {
-        // Set up the current power of the player
         if (Player.isDark)
         {
             currentPowerText.text = "Dark Coon";

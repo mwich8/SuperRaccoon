@@ -22,11 +22,14 @@ public class MainMenu : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        buttonWidth = Screen.width / 3;
-        buttonHeight = Screen.height / 8;
+        // Calculates the size of the current screen
         float screenHeight = Camera.main.orthographicSize;
         float screenRatioXtoY = (float)Screen.width / (float)Screen.height;
         float actualScreenWidth = (screenRatioXtoY * 2f * screenHeight);
+        // Sets up the button size w.r.t. the actual screen
+        buttonWidth = Screen.width / 3;
+        buttonHeight = Screen.height / 8;
+        // Sets up the screen to landscape mode and scales the background
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         transform.localScale = new Vector3(actualScreenWidth / 10, 1f, screenHeight / 5);
         // Resizes button and colors it
@@ -47,9 +50,11 @@ public class MainMenu : MonoBehaviour {
             }
         }
         resizedButton.Apply();
+        // Sets up the buttonNames
         buttonMessages[0] = "Start";
         buttonMessages[1] = "Shop";
         buttonMessages[2] = "Credits";
+        // Gets the length of each button-name
         for (int i = 0; i <= 2; i++)
         {
             buttonLength[i] = buttonMessages[i].Length;
@@ -84,22 +89,27 @@ public class MainMenu : MonoBehaviour {
     // Creates the buttons and is responsible for the major scene handling
     void OnGUI()
     {
+        // Sets up the GUI style
         GUIStyle superGUIStyle = new GUIStyle();
         superGUIStyle.font = avengersFont;
         superGUIStyle.fontSize = 30;
         superGUIStyle.normal.textColor = new Color(168f / 255f, 29f / 255f, 29f / 255f);
+        // Center the texts in the buttons (at least it should, it more an approximation to be honest)
         float fontScaleX = superGUIStyle.fontSize * 0.3f;
         float offsetY = (buttonHeight - superGUIStyle.fontSize * 0.8f) / 2;
+        // Start Button
         if (GUI.Button(new Rect((Screen.width/2) - (buttonWidth/2), Screen.height - (buttonHeight * 6), resizedButton.width, resizedButton.height), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("MainScene");
         }
         GUI.Button(new Rect((Screen.width / 2) - (buttonLength[0] * fontScaleX) , Screen.height - (buttonHeight * 6) + offsetY, 0, 0), buttonMessages[0], superGUIStyle);
+        // Shop Button
         if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), Screen.height - (buttonHeight * 4), buttonWidth, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("Shop");
         }
         GUI.Button(new Rect((Screen.width / 2) - (buttonLength[1] * fontScaleX), Screen.height - (buttonHeight * 4) + offsetY, 0, 0), buttonMessages[1], superGUIStyle);
+        // Credits Button
         if (GUI.Button(new Rect((Screen.width / 2) - (buttonWidth / 2), Screen.height - (buttonHeight * 2), buttonWidth, buttonHeight), resizedButton, superGUIStyle))
         {
             Application.LoadLevel("Credits");

@@ -1,0 +1,7 @@
+You can either play this game on PC by using the "Space"-key or play it on an Android phone(for which it was developed) by tapping on the screen.
+Jumping: Spacebar/Tap once
+If you collected enough energy you can buy ugrades. Only one upgrade at a time might be activated.
+Dark Coon:
+	Stamp on the ground: Tap if you're in the air
+Light Coon:
+	Double jump: Tap if you're in the air
